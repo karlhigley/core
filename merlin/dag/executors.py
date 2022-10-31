@@ -61,6 +61,11 @@ class LocalExecutor:
                 " compatibility.)"
             )
 
+        if len(nodes) > 1:
+            raise ValueError(
+                "DaskExecutor detected multiple output nodes, only one output node supported."
+            )
+
         output_data = None
 
         for node in nodes:
@@ -245,6 +250,11 @@ class DaskExecutor:
                 " `graph` argument must be either a `Graph` object (preferred)"
                 " or a list of `Node` objects (deprecated, but supported for backward"
                 " compatibility.)"
+            )
+
+        if len(nodes) > 1:
+            raise ValueError(
+                "DaskExecutor detected multiple output nodes, only one output node supported."
             )
 
         self._clear_worker_cache()
